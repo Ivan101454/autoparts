@@ -3,6 +3,7 @@ package by.ivan101454.autoparts.entity;
 import by.ivan101454.autoparts.enums.Colour;
 import by.ivan101454.autoparts.enums.Country;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Car {

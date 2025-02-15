@@ -10,8 +10,12 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.IntStream;
 
@@ -19,21 +23,31 @@ import java.util.stream.IntStream;
 public class InMemoryPartRepositoryImpl implements PartRepository {
 
     private final List<Part> parts = Collections.synchronizedList(new LinkedList<>());
+    private final Map<String, Car> cars = Collections.synchronizedMap(new HashMap<>());
 
     public InMemoryPartRepositoryImpl() {
-        parts.add(new Part(UUID.randomUUID(), "Wing", new BigDecimal(50),
-                new Car(UUID.randomUUID(), "Audi", "A6C6", Country.ENGLAND, 4152, Colour.SILVER, 2005),
+        cars.put("T4152", new Car(UUID.randomUUID(), "Audi", "A6C6", Country.ENGLAND, 4152, Colour.SILVER, 2005));
+        cars.put("64153", new Car(UUID.randomUUID(), "VW", "PASSAT B5", Country.GERMANY, 4153, Colour.BLACK, 2002));
+        cars.put("A4154", new Car(UUID.randomUUID(), "BMW", "E60", Country.AUSTRALIA, 4154, Colour.BLUE, 2006));
+        parts.add(new Part(UUID.randomUUID(), "Wing", new BigDecimal(50), cars.get("T4152"),
                 903456, Direction.FRONT, Side.LINKS));
-        parts.add(new Part(UUID.randomUUID(), "Hood", new BigDecimal(100),
-                new Car(UUID.randomUUID(), "VW", "PASSAT B5", Country.GERMANY, 4153, Colour.BLACK, 2002),
+        parts.add(new Part(UUID.randomUUID(), "Hood", new BigDecimal(100), cars.get("64153"),
                 987654, Direction.NONE, Side.NONE));
-        parts.add(new Part(UUID.randomUUID(), "Headlight", new BigDecimal(40),
-                new Car(UUID.randomUUID(), "BMW", "E60", Country.ENGLAND, 4154, Colour.BLUE, 2006),
+        parts.add(new Part(UUID.randomUUID(), "Headlight", new BigDecimal(40), cars.get("A4154"),
                 978123, Direction.FRONT, Side.RIGHTS));
     }
 
     @Override
     public List<Part> findAll() {
         return Collections.unmodifiableList(parts);
+    }
+
+    @Override
+    public Part save(Part part) {
+        part.setId(UUID.randomUUID());
+        parts.add(part);
+//        Integer max = cars.entrySet().stream().filter(x -> x.getValue().getCountry() == part.getCar().getCountry())
+//                .max(Comparator.comparingInt(c -> c.getValue().getNumberOfCar())).map(x -> x.getValue().getNumberOfCar()).orElse(0);
+        return part;
     }
 }

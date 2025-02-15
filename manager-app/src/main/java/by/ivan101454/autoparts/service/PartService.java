@@ -1,5 +1,6 @@
 package by.ivan101454.autoparts.service;
 
+import by.ivan101454.autoparts.dto.PartDto;
 import by.ivan101454.autoparts.entity.Part;
 
 import java.util.List;
@@ -7,4 +8,6 @@ import java.util.List;
 public interface PartService {
 
     List<Part> findAllParts();
+
+    PartDto createPart(PartDto partDto);
 }
