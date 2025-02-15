@@ -1,0 +1,3 @@
+rootProject.name = 'autoparts'
+include 'manager-app'
+
