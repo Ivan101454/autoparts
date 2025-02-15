@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список товаров &ndash; Магазин автозапчастей</title>
+</head>
+<body>
+<h1>Список запчастей</h1>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Запчасть</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="part : ${parts}">
+        <td data-th-text="${part.article}"></td>
+        <td>
+            <a data-th-href="@{catalogue/parts/{articlePart}(articlePart=${part.article})}"
+               data-th-text="${part.name}"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
