@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${part.name}]] &ndash; Магазин автозапчастей</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h1 data-th-text="${part.name}"></h1>
+    <ul>
+        <li><strong>Article: </strong>: <span data-th-text="${part.article}"></span></li>
+        <li><strong>Price: </strong>: <span data-th-text="${part.price}"></span></li>
+        <li><strong>Direction: </strong>: <span data-th-text="${part.direction}"></span></li>
+        <li><strong>Side: </strong>: <span data-th-text="${part.side}"></span></li>
+    </ul>
+<a data-th-href="@{/catalogue/parts/{partArticle}/edit(partArticle=${part.article})}">&llarr; Редактировать</a><br>
+<a data-th-href="@{/catalogue/parts/list}">&llarr; К списку запчастей</a>
+<form method="post" data-th-action="@{/catalogue/parts/{partArticle}/delete(partArticle=${part.article})}">
+    <button type="submit">Удалить</button>
+</form>
+</body>
+</html>

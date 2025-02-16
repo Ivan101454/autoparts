@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Список товаров &ndash; Магазин автозапчастей</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 <a data-th-href="@{/catalogue/parts/create}">&llarr; Создать новую запчасть</a>
@@ -18,7 +19,7 @@
     <tr data-th-each="part : ${parts}">
         <td data-th-text="${part.article}"></td>
         <td>
-            <a data-th-href="@{catalogue/parts/{articlePart}(articlePart=${part.article})}"
+            <a data-th-href="@{/catalogue/parts/{articlePart}(articlePart=${part.article})}"
                data-th-text="${part.name}"></a>
         </td>
     </tr>

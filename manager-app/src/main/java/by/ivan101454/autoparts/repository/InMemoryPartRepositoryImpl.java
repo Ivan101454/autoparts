@@ -10,14 +10,12 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.IntStream;
 
 @Repository
 public class InMemoryPartRepositoryImpl implements PartRepository {
@@ -49,5 +47,15 @@ public class InMemoryPartRepositoryImpl implements PartRepository {
 //        Integer max = cars.entrySet().stream().filter(x -> x.getValue().getCountry() == part.getCar().getCountry())
 //                .max(Comparator.comparingInt(c -> c.getValue().getNumberOfCar())).map(x -> x.getValue().getNumberOfCar()).orElse(0);
         return part;
+    }
+
+    @Override
+    public Optional<Part> findByArticle(int partArticle) {
+        return parts.stream().filter(x -> x.getArticle() == partArticle).findFirst();
+    }
+
+    @Override
+    public void delete(int article) {
+        parts.removeIf(part -> part.getArticle() == article);
     }
 }
