@@ -2,27 +2,20 @@ package by.ivan101454.autoparts.entity;
 
 import by.ivan101454.autoparts.enums.Direction;
 import by.ivan101454.autoparts.enums.Side;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class Part {
-
-    private UUID id;
-    private String name;
-    private BigDecimal price;
-    private Car car;
-    private int article;
-    private Direction direction;
-    private Side side;
+public record Part(
+        String name,
+        BigDecimal price,
+        String codeCarCountry,
+        String numberCar,
+        int article,
+        Direction direction,
+        Side side) {
 }

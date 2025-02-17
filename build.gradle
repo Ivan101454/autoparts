@@ -42,6 +42,11 @@ allprojects {
 	}
 }
 
+allprojects {
+	tasks.withType(JavaCompile).configureEach {
+		options.compilerArgs << '-parameters'
+	}
+}
 
 
 

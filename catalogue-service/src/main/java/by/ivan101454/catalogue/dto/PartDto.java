@@ -1,7 +1,7 @@
-package by.ivan101454.autoparts.dto;
+package by.ivan101454.catalogue.dto;
 
-import by.ivan101454.autoparts.enums.Direction;
-import by.ivan101454.autoparts.enums.Side;
+import by.ivan101454.catalogue.enums.Direction;
+import by.ivan101454.catalogue.enums.Side;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;

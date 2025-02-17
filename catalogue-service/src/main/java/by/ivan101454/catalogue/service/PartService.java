@@ -1,7 +1,7 @@
-package by.ivan101454.autoparts.service;
+package by.ivan101454.catalogue.service;
 
-import by.ivan101454.autoparts.dto.PartDto;
-import by.ivan101454.autoparts.entity.Part;
+import by.ivan101454.catalogue.dto.PartDto;
+import by.ivan101454.catalogue.entity.Part;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,15 +1,13 @@
-package by.ivan101454.autoparts.entity;
+package by.ivan101454.catalogue.entity;
 
-import by.ivan101454.autoparts.enums.Colour;
-import by.ivan101454.autoparts.enums.Country;
+import by.ivan101454.catalogue.enums.Colour;
+import by.ivan101454.catalogue.enums.Country;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 import java.util.UUID;
 
 @Getter

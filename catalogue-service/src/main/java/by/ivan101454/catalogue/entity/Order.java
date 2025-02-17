@@ -1,4 +1,4 @@
-package by.ivan101454.autoparts.entity;
+package by.ivan101454.catalogue.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

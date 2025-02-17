@@ -1,11 +1,11 @@
-package by.ivan101454.autoparts.repository;
+package by.ivan101454.catalogue.repository;
 
-import by.ivan101454.autoparts.entity.Car;
-import by.ivan101454.autoparts.entity.Part;
-import by.ivan101454.autoparts.enums.Colour;
-import by.ivan101454.autoparts.enums.Country;
-import by.ivan101454.autoparts.enums.Direction;
-import by.ivan101454.autoparts.enums.Side;
+import by.ivan101454.catalogue.entity.Car;
+import by.ivan101454.catalogue.entity.Part;
+import by.ivan101454.catalogue.enums.Colour;
+import by.ivan101454.catalogue.enums.Country;
+import by.ivan101454.catalogue.enums.Direction;
+import by.ivan101454.catalogue.enums.Side;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
