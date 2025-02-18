@@ -1,10 +1,10 @@
 package by.ivan101454.autoparts.controller;
 
+import by.ivan101454.autoparts.client.PartsRestClient;
 import by.ivan101454.autoparts.dto.PartDto;
 import by.ivan101454.autoparts.enums.Country;
 import by.ivan101454.autoparts.enums.Direction;
 import by.ivan101454.autoparts.enums.Side;
-import by.ivan101454.autoparts.service.PartService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("catalogue/parts")
 public class PartsController {
 
-    private final PartService partService;
+    private final PartsRestClient partService;
 
     @GetMapping("list")
     public String getPartsList(Model model) {
@@ -38,6 +38,9 @@ public class PartsController {
 
     @PostMapping("create")
     public String createPart(@Valid PartDto partDto, BindingResult bindingResult, Model model) {
+        model.addAttribute("countries", Country.values());
+        model.addAttribute("directions", Direction.values());
+        model.addAttribute("sides", Side.values());
         if (bindingResult.hasErrors()) {
             model.addAttribute("partDto", partDto);
             model.addAttribute("errors", bindingResult.getAllErrors().stream()

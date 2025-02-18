@@ -13,7 +13,7 @@ public interface PartMapper {
     PartMapper INSTANCE = Mappers.getMapper(PartMapper.class);
     @Mappings({@Mapping(target = "codeCarCountry", ignore = true), @Mapping(target = "numberCar", ignore = true)})
     PartDto partToPartDto(Part part);
-    @Mappings({@Mapping(target = "car", ignore = true), @Mapping(target = "id", ignore = true)})
+//    @Mappings({@Mapping(target = "car", ignore = true), @Mapping(target = "id", ignore = true)})
     Part partDtoToPart(PartDto partDto);
 
 }

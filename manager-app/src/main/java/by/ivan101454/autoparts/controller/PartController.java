@@ -1,10 +1,10 @@
 package by.ivan101454.autoparts.controller;
 
+import by.ivan101454.autoparts.client.PartsRestClient;
 import by.ivan101454.autoparts.dto.PartDto;
 import by.ivan101454.autoparts.enums.Country;
 import by.ivan101454.autoparts.enums.Direction;
 import by.ivan101454.autoparts.enums.Side;
-import by.ivan101454.autoparts.service.PartService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ import java.util.NoSuchElementException;
 @RequestMapping("catalogue/parts/{partArticle:\\d+}")
 public class PartController {
 
-    private final PartService partService;
+    private final PartsRestClient partService;
     private final MessageSource messageSource;
 
     @ModelAttribute("part")
@@ -68,7 +68,7 @@ public class PartController {
 
     @PostMapping("delete")
     public String delete(@ModelAttribute("part") PartDto part) {
-        partService.delete(part.article());
+        partService.deletePart(part.article());
         return "redirect:/catalogue/parts/list";
     }
 

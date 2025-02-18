@@ -1,0 +1,10 @@
+ivan101454:
+  services:
+    catalogue:
+      uri: http://localhost:8081
+
+
+
+
+
+

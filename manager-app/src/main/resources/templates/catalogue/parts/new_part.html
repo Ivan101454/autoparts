@@ -25,7 +25,7 @@
         </label><br>
         <label>
             Страна:<br>
-            <select name="country">
+            <select name="codeCarCountry">
                 <option data-th-each="country: ${countries}" data-th-value="${country.getCode()}" data-th-text="${country.name()}"></option>
             </select>
         </label><br>
@@ -45,7 +45,7 @@
         </label><br>
         <label>
             Сторона:<br>
-            <select name="direction">
+            <select name="side">
                 <option data-th-each="side: ${sides}" data-th-value="${side?.name()}" data-th-text="${side.name()}"></option>
             </select>
         </label><br>
