@@ -1,5 +1,6 @@
 package by.ivan101454.autoparts.controller;
 
+import by.ivan101454.autoparts.client.BadRequestException;
 import by.ivan101454.autoparts.client.PartsRestClient;
 import by.ivan101454.autoparts.dto.PartDto;
 import by.ivan101454.autoparts.enums.Country;
@@ -33,7 +34,10 @@ public class PartController {
     private final MessageSource messageSource;
 
     @ModelAttribute("part")
-    public PartDto part(@PathVariable("partArticle") int partArticle) {
+    public PartDto part(@PathVariable("partArticle") int partArticle, Model model) {
+        model.addAttribute("countries", Country.values());
+        model.addAttribute("directions", Direction.values());
+        model.addAttribute("sides", Side.values());
         return partService.findPart(partArticle).orElseThrow(() -> new NoSuchElementException("catalogue.errors.product.not_found"));
     }
 
@@ -44,25 +48,19 @@ public class PartController {
 
     @GetMapping("edit")
     public String getPartEditPage(Model model) {
-        model.addAttribute("countries", Country.values());
-        model.addAttribute("directions", Direction.values());
-        model.addAttribute("sides", Side.values());
+
         return "catalogue/parts/edit";
     }
 
     @PostMapping("edit")
-    public String updatePart(@Valid @ModelAttribute("partUpdate") PartDto part, BindingResult bindingResult, Model model) {
-        model.addAttribute("countries", Country.values());
-        model.addAttribute("directions", Direction.values());
-        model.addAttribute("sides", Side.values());
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("partUpdate", part);
-            model.addAttribute("errors", bindingResult.getAllErrors().stream()
-                    .map(ObjectError::getDefaultMessage).toList());
-            return "catalogue/parts/edit";
-        } else {
+    public String updatePart(@Valid @ModelAttribute("partUpdate") PartDto part, Model model) {
+        try {
             partService.updatePart(part);
             return "redirect:/catalogue/parts/%d".formatted(part.article());
+        } catch (BadRequestException exception) {
+            model.addAttribute("partUpdate", part);
+            model.addAttribute("errors", exception.getErrors());
+            return "catalogue/parts/edit";
         }
     }
 
