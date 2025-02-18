@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,6 +23,13 @@ public class PartsController {
 
     private final PartsRestClient partService;
 
+    @ModelAttribute
+    public void populateModel(Model model) {
+        model.addAttribute("countries", Country.values());
+        model.addAttribute("directions", Direction.values());
+        model.addAttribute("sides", Side.values());
+    }
+
     @GetMapping("list")
     public String getPartsList(Model model) {
         model.addAttribute("parts", partService.findAllParts());
@@ -30,17 +38,11 @@ public class PartsController {
 
     @GetMapping("create")
     public String getNewPartPage(Model model) {
-        model.addAttribute("countries", Country.values());
-        model.addAttribute("directions", Direction.values());
-        model.addAttribute("sides", Side.values());
         return "catalogue/parts/new_part";
     }
 
     @PostMapping("create")
     public String createPart(@Valid PartDto partDto, BindingResult bindingResult, Model model) {
-        model.addAttribute("countries", Country.values());
-        model.addAttribute("directions", Direction.values());
-        model.addAttribute("sides", Side.values());
         if (bindingResult.hasErrors()) {
             model.addAttribute("partDto", partDto);
             model.addAttribute("errors", bindingResult.getAllErrors().stream()
