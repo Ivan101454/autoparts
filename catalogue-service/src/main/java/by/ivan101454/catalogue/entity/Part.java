@@ -4,6 +4,8 @@ import by.ivan101454.catalogue.enums.Direction;
 import by.ivan101454.catalogue.enums.Side;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,19 +29,20 @@ import java.util.UUID;
 public class Part {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private UUID partId;
     @Column(name = "name")
     private String name;
     @Column(name = "price")
     private BigDecimal price;
-    @Column(name = "car")
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "car_id")
     private Car car;
     @Column(name = "article")
     private int article;
     @Column(name = "direction")
+    @Enumerated(EnumType.STRING)
     private Direction direction;
+    @Enumerated(EnumType.STRING)
     @Column(name = "side")
     private Side side;
 }

@@ -7,6 +7,8 @@ import by.ivan101454.catalogue.repository.PartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -20,7 +22,15 @@ public class PartServiceImpl implements PartService {
 
     @Override
     public List<PartDto> findAllParts() {
-        return partRepository.findAll().stream().map(partMapper::partToPartDto).toList();
+        Iterable<Part> all = partRepository.findAll();
+        Iterator<Part> iterator = all.iterator();
+        ArrayList<PartDto> partDtos = new ArrayList<>();
+        while (iterator.hasNext()) {
+            Part next = iterator.next();
+            PartDto partDto = partMapper.partToPartDto(next);
+            partDtos.add(partDto);
+        }
+        return partDtos;
     }
 
     @Override
@@ -48,7 +58,7 @@ public class PartServiceImpl implements PartService {
 
     @Override
     public void delete(int article) {
-        partRepository.findByArticle(article)
-                .ifPresentOrElse(p -> partRepository.delete(article), () -> {throw new NoSuchElementException();});
+            partRepository.findByArticle(article)
+                    .ifPresentOrElse(partRepository::delete, () -> {throw new NoSuchElementException();});
     }
 }
