@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,8 +31,9 @@ public class PartsController {
     }
 
     @GetMapping("list")
-    public String getPartsList(Model model) {
-        model.addAttribute("parts", partService.findAllParts());
+    public String getPartsList(Model model, @RequestParam(name = "filter", required = false) String filter) {
+        model.addAttribute("parts", partService.findAllParts(filter));
+        model.addAttribute("filter", filter);
         return "catalogue/parts/list";
     }
 

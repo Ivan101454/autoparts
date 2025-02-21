@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface PartsRestClient {
 
-    List<PartDto> findAllParts();
+    List<PartDto> findAllParts(String filter);
     PartDto createPart(PartDto newPart);
     Optional<PartDto> findPart(int partArticle);
     void updatePart(PartDto updatePart);

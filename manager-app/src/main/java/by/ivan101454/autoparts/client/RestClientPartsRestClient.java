@@ -22,10 +22,10 @@ public class RestClientPartsRestClient implements PartsRestClient {
     private final RestClient restClient;
 
     @Override
-    public List<PartDto> findAllParts() {
+    public List<PartDto> findAllParts(String filter) {
         return restClient
                 .get()
-                .uri("/catalogue-api/parts")
+                .uri("/catalogue-api/parts?filter={filter}", filter)
                 .retrieve()
                 .body(PARTS_TYPE_REFERENCE);
     }

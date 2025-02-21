@@ -8,6 +8,11 @@
 <body>
 <a data-th-href="@{/catalogue/parts/create}">&llarr; Создать новую запчасть</a>
 <h1>Список запчастей</h1>
+<form method="get" data-th-action="@{/catalogue/parts/list}">
+    <label>Фильтр:<input type="text" name="filter" data-th-value="${filter}">
+        <button type="submit">Поиск</button>
+    </label>
+</form>
 <table>
     <thead>
     <tr>
