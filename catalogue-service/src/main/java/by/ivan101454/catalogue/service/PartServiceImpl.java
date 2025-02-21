@@ -67,7 +67,7 @@ public class PartServiceImpl implements PartService {
     @Override
     public List<PartDto> findAllParts(String filter) {
         if (filter != null && !filter.isBlank()) {
-            return trasferIterToList(partRepository.findAllByNameLikeIgnoreCase(filter));
+            return trasferIterToList(partRepository.findAllByNameLikeIgnoreCase("%" + filter + "%"));
         } else {
             return trasferIterToList(partRepository.findAll());
         }
