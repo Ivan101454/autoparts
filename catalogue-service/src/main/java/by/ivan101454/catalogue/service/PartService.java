@@ -17,4 +17,6 @@ public interface PartService {
     void updatePart(PartDto partDto);
 
     void delete(int article);
+
+    List<PartDto> findAllParts(String filter);
 }

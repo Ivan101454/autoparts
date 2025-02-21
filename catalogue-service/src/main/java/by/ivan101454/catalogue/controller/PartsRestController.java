@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -31,8 +32,8 @@ public class PartsRestController {
     private final MessageSource messageSource;
 
     @GetMapping()
-    public List<PartDto> findParts() {
-        return partService.findAllParts();
+    public List<PartDto> findParts(@RequestParam(required = false) String filter) {
+        return partService.findAllParts(filter);
     }
 
     @PostMapping()

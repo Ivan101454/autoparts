@@ -6,6 +6,7 @@ import by.ivan101454.catalogue.mapper.PartMapper;
 import by.ivan101454.catalogue.repository.PartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,7 +25,7 @@ public class PartServiceImpl implements PartService {
     public List<PartDto> findAllParts() {
         Iterable<Part> all = partRepository.findAll();
         Iterator<Part> iterator = all.iterator();
-        ArrayList<PartDto> partDtos = new ArrayList<>();
+        List<PartDto> partDtos = new ArrayList<>();
         while (iterator.hasNext()) {
             Part next = iterator.next();
             PartDto partDto = partMapper.partToPartDto(next);
@@ -46,6 +47,7 @@ public class PartServiceImpl implements PartService {
     }
 
     @Override
+    @Transactional
     public void updatePart(PartDto partDto) {
         partRepository.findByArticle(partDto.article())
                 .ifPresentOrElse(part -> {
@@ -60,5 +62,25 @@ public class PartServiceImpl implements PartService {
     public void delete(int article) {
             partRepository.findByArticle(article)
                     .ifPresentOrElse(partRepository::delete, () -> {throw new NoSuchElementException();});
+    }
+
+    @Override
+    public List<PartDto> findAllParts(String filter) {
+        if (filter != null && !filter.isBlank()) {
+            return trasferIterToList(partRepository.findAllByNameLikeIgnoreCase(filter));
+        } else {
+            return trasferIterToList(partRepository.findAll());
+        }
+    }
+
+    private List<PartDto> trasferIterToList(Iterable<Part> iter) {
+        Iterator<Part> iterator = iter.iterator();
+        List<PartDto> partDtos = new ArrayList<>();
+        while (iterator.hasNext()) {
+            Part next = iterator.next();
+            PartDto partDto = partMapper.partToPartDto(next);
+            partDtos.add(partDto);
+        }
+        return partDtos;
     }
 }
